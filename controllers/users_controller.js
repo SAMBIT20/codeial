@@ -15,3 +15,14 @@ module.exports.signIn = (req, res) => {
     title: "Codial | Sign In",
   });
 };
+
+//Get the sign up data
+
+module.exports.create = (req, res) => {
+  //ToDO Later
+};
+
+//signIN and create a session for the User
+module.exports.createSession = (req, res) => {
+  //Todo later
+};
