@@ -1,0 +1,28 @@
+header {
+  background-color: rgb(19, 93, 252);
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+#nav-content ul {
+  display: flex;
+  padding-top: 5px;
+}
+#logo {
+  color: #ffff;
+  margin-left: 10px;
+}
+#logo a {
+  text-decoration: none;
+  color: #ffff;
+}
+#nav-content ul li {
+  list-style: none;
+}
+#nav-content ul li a {
+  text-decoration: none;
+  color: #ffff;
+  font-weight: bold;
+  margin-right: 20px;
+}
