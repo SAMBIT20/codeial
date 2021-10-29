@@ -6,13 +6,21 @@ module.exports.profile = (req, res) => {
   });
 };
 
+//render the sign up page
 module.exports.signUp = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
+
   return res.render("user_sign_up", {
     title: "Codial | Sign Up",
   });
 };
 
 module.exports.signIn = (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect("/users/profile");
+  }
   return res.render("user_sign_in", {
     title: "Codial | Sign In",
   });
