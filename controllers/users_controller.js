@@ -1,3 +1,4 @@
+const { response } = require("express");
 const User = require("../models/user");
 
 module.exports.profile = (req, res) => {
@@ -7,6 +8,16 @@ module.exports.profile = (req, res) => {
       profile_user: user,
     });
   });
+};
+
+module.exports.update = (req, res) => {
+  if (req.user.id == req.params.id) {
+    User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+      return res.redirect("back");
+    });
+  } else {
+    return res.ststus(401).send("Unauthorized");
+  }
 };
 
 //render the sign up page
