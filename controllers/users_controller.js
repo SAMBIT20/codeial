@@ -10,12 +10,37 @@ module.exports.profile = (req, res) => {
   });
 };
 
-module.exports.update = (req, res) => {
+module.exports.update = async (req, res) => {
+  // if (req.user.id == req.params.id) {
+  //   User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+  //     return res.redirect("back");
+  //   });
+  // } else {
+  //   return res.ststus(401).send("Unauthorized");
+  // }
   if (req.user.id == req.params.id) {
-    User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
+    try {
+      let user = await User.findById(req.params.id);
+      User.uploadedAvater(req, res, function (err) {
+        if (err) {
+          console.log("******MUlter Error", err);
+        }
+        user.name = req.body.name;
+        user.email = req.body.email;
+
+        if (req.file) {
+          //Saving the path of the uploaded file in to the avatar filed in user
+          user.avatar = User.avatarPath + "/" + req.file.filename;
+        }
+        user.save();
+        return res.redirect("back");
+      });
+    } catch {
+      req.flash("error", err);
       return res.redirect("back");
-    });
+    }
   } else {
+    req.flash("error", "Unauthorized");
     return res.ststus(401).send("Unauthorized");
   }
 };
